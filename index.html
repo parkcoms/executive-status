@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임원의 근로자성 진단 | 상생의 노동법</title>
+<meta name="description" content="임원의 근로기준법상 근로자성 인정 가능성을 대법원 판례의 판단 기준에 따라 단계별로 자가진단하는 도구. 기업측 노동법 전문 변호사가 설계했습니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="임원의 근로자성 진단 | 상생의 노동법">
+<meta property="og:description" content="우리 회사 임원은 근로기준법상 근로자일까요? 대법원의 판단 기준을 11개 사실 문항으로 옮긴 3분 자가진단.">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --paper:#FBF9F3;
+  --paper-deep:#F3EFE5;
+  --ink:#182740;
+  --ink-soft:#4C5D72;
+  --ink-faint:#8B96A3;
+  --line:#DAD3C3;
+  --line-soft:#E8E3D6;
+  --seal:#BE3325;
+  --seal-soft:#F6E4E0;
+  --navy:#2C4A6E;
+  --navy-soft:#E2E8EF;
+  --amber:#9A7420;
+  --amber-soft:#F5ECD8;
+  --serif:'Gowun Batang','Nanum Myeongjo',serif;
+  --sans:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  background-image:linear-gradient(180deg,rgba(24,39,64,.025),rgba(24,39,64,0) 220px);
+  color:var(--ink);
+  line-height:1.7;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:740px;margin:0 auto;padding:0 22px 96px}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
+
+/* ── 상단 문서 헤더 ───────────────────── */
+.masthead{
+  padding:26px 0 18px;
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:1px solid var(--line);
+}
+.masthead .brand{
+  font-family:var(--serif);font-weight:700;font-size:.95rem;letter-spacing:.14em;
+}
+.masthead .doc-no{
+  font-size:.72rem;color:var(--ink-faint);letter-spacing:.1em;
+}
+
+/* ── 진행 표시 ───────────────────── */
+.progress{margin:22px 0 0;display:none}
+.progress.show{display:block}
+.progress-rail{display:flex;gap:0;border-bottom:2px solid var(--line-soft);position:relative}
+.progress-fill{position:absolute;bottom:-2px;left:0;height:2px;background:var(--ink);transition:width .45s ease}
+.progress-steps{display:flex;justify-content:space-between;padding:8px 0 0;font-size:.72rem;color:var(--ink-faint);letter-spacing:.02em}
+.progress-steps span{flex:1;text-align:center;white-space:nowrap}
+.progress-steps span.on{color:var(--ink);font-weight:600}
+@media(max-width:560px){
+  .progress-steps span{display:none}
+  .progress-steps span.on{display:block;text-align:left}
+}
+
+/* ── 화면 공통 ───────────────────── */
+.screen{display:none;animation:fadein .4s ease}
+.screen.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── 인트로 ───────────────────── */
+.hero{padding:64px 0 8px;text-align:center}
+.hero .eyebrow{
+  font-size:.78rem;letter-spacing:.32em;color:var(--ink-soft);
+  text-transform:uppercase;margin-bottom:26px;
+}
+.hero .rule{width:56px;height:1px;background:var(--ink);margin:0 auto 6px}
+.hero .rule.double{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);height:4px;background:none;margin-bottom:30px}
+.hero h1{
+  font-family:var(--serif);font-weight:700;
+  font-size:clamp(2.1rem,6.4vw,3.1rem);
+  line-height:1.32;letter-spacing:.02em;margin-bottom:14px;
+}
+.hero h1 .hanja{display:block;font-size:.42em;font-weight:400;letter-spacing:.55em;color:var(--ink-faint);margin-bottom:16px}
+.hero .lead{
+  font-size:1.02rem;color:var(--ink-soft);max-width:560px;margin:22px auto 0;
+  text-align:left;word-break:keep-all;
+}
+.hero .lead strong{color:var(--ink);font-weight:600}
+.meta-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:34px 0 0}
+.meta-chips span{
+  font-size:.78rem;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:100px;padding:5px 14px;background:#fff8;
+}
+.start-area{text-align:center;margin:40px 0 0}
+.btn-primary{
+  font-size:1rem;font-weight:600;letter-spacing:.14em;
+  background:var(--ink);color:var(--paper);border:1px solid var(--ink);
+  padding:15px 52px;border-radius:2px;transition:background .2s;
+}
+.btn-primary:hover{background:#0e1a2e}
+
+/* 판단 구조 안내 */
+
+/* ── 단계 화면 ───────────────────── */
+.stage-head{padding:44px 0 10px;border-bottom:3px double var(--line);margin-bottom:8px}
+.stage-head .stage-no{
+  font-family:var(--serif);font-size:.85rem;letter-spacing:.3em;color:var(--seal);
+  margin-bottom:10px;display:flex;align-items:center;gap:12px;
+}
+.stage-head .stage-no .core{
+  font-family:var(--sans);font-size:.68rem;letter-spacing:.08em;color:var(--seal);
+  border:1px solid var(--seal);border-radius:2px;padding:2px 8px;
+}
+.stage-head h2{font-family:var(--serif);font-size:clamp(1.4rem,4vw,1.75rem);letter-spacing:.03em;line-height:1.4}
+.stage-head .stage-sub{font-size:.88rem;color:var(--ink-soft);margin-top:8px;word-break:keep-all}
+.stage-note{
+  margin-top:16px;font-size:.84rem;color:var(--ink-soft);
+  background:var(--paper-deep);border-left:2px solid var(--ink);
+  padding:12px 16px;word-break:keep-all;
+}
+
+/* 질문 */
+.q{padding:30px 0 26px;border-bottom:1px solid var(--line-soft)}
+.q:last-of-type{border-bottom:none}
+.q-num{
+  font-family:var(--serif);font-size:.8rem;color:var(--ink-faint);letter-spacing:.15em;margin-bottom:8px;
+}
+.q-text{font-size:1.04rem;font-weight:600;line-height:1.65;word-break:keep-all;margin-bottom:16px}
+.q-answers{display:flex;gap:8px;flex-wrap:wrap}
+.ans-btn{
+  flex:1;min-width:84px;
+  border:1px solid var(--line);background:#fffdf9;color:var(--ink-soft);
+  font-size:.92rem;font-weight:500;padding:12px 8px;border-radius:2px;
+  transition:all .15s;
+}
+.ans-btn:hover{border-color:var(--ink-soft);color:var(--ink)}
+.ans-btn.sel-yes,.ans-btn.sel-no{background:var(--ink);border-color:var(--ink);color:var(--paper);font-weight:600}
+.ans-btn.sel-partial{background:var(--amber-soft);border:1px dashed var(--amber);color:var(--amber);font-weight:600}
+.q details{margin-top:14px}
+.q summary{
+  font-size:.8rem;color:var(--ink-faint);cursor:pointer;list-style:none;
+  display:inline-flex;align-items:center;gap:6px;letter-spacing:.04em;
+}
+.q summary::-webkit-details-marker{display:none}
+.q summary::before{content:"▸";font-size:.7rem;transition:transform .2s}
+.q details[open] summary::before{transform:rotate(90deg)}
+.q details p{
+  margin-top:10px;font-size:.86rem;color:var(--ink-soft);line-height:1.75;
+  background:var(--paper-deep);padding:14px 16px;border-radius:2px;word-break:keep-all;
+}
+
+/* 네비게이션 */
+.stage-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;gap:14px}
+.btn-ghost{
+  background:none;border:1px solid var(--line);color:var(--ink-soft);
+  padding:12px 26px;font-size:.92rem;border-radius:2px;letter-spacing:.06em;
+}
+.btn-ghost:hover{border-color:var(--ink-soft);color:var(--ink)}
+.btn-next{
+  background:var(--ink);color:var(--paper);border:1px solid var(--ink);
+  padding:12px 38px;font-size:.95rem;font-weight:600;border-radius:2px;letter-spacing:.1em;
+}
+.btn-next:disabled{background:var(--line);border-color:var(--line);color:#fff;cursor:not-allowed}
+.answer-count{font-size:.78rem;color:var(--ink-faint)}
+
+/* 지위 선택 */
+.gw-cards{display:grid;gap:12px;margin-top:26px}
+.gw-card{
+  text-align:left;background:#fffdf9;border:1px solid var(--line);border-radius:2px;
+  padding:20px 22px;transition:all .15s;display:block;width:100%;
+}
+.gw-card:hover{border-color:var(--ink-soft)}
+.gw-card.sel{border:1.5px solid var(--ink);background:var(--paper-deep)}
+.gw-card .gw-title{font-family:var(--serif);font-weight:700;font-size:1.08rem;margin-bottom:4px}
+.gw-card .gw-desc{font-size:.85rem;color:var(--ink-soft);margin-bottom:8px}
+.gw-card .gw-baseline{font-size:.78rem;color:var(--ink-faint);word-break:keep-all}
+.gw-card.sel .gw-baseline{color:var(--ink-soft)}
+
+/* ── 결과 ───────────────────── */
+.verdict{
+  margin-top:48px;border:1px solid var(--line);background:#fffdf9;
+  padding:44px 30px 40px;text-align:center;position:relative;
+}
+.verdict .v-label{font-size:.8rem;letter-spacing:.3em;color:var(--ink-soft);margin-bottom:26px}
+.stamp{
+  display:inline-block;
+  font-family:var(--serif);font-weight:700;
+  font-size:clamp(1.5rem,5vw,2rem);line-height:1.35;letter-spacing:.14em;
+  padding:20px 24px;border:3.5px solid var(--seal);border-radius:6px;color:var(--seal);
+  transform:rotate(-3.5deg);
+  mix-blend-mode:multiply;
+  position:relative;white-space:pre-line;
+}
+.stamp.ink-navy{border-color:var(--navy);color:var(--navy)}
+.stamp.ink-mixed{border-color:var(--amber);color:var(--amber)}
+.stamp::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 18% 30%,var(--paper) 0 2px,transparent 3px),
+    radial-gradient(circle at 72% 64%,var(--paper) 0 2px,transparent 3px),
+    radial-gradient(circle at 45% 85%,var(--paper) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 88% 18%,var(--paper) 0 1.5px,transparent 2.5px);
+  opacity:.55;pointer-events:none;
+}
+@keyframes stampin{
+  0%{opacity:0;transform:rotate(-3.5deg) scale(1.9)}
+  55%{opacity:1;transform:rotate(-3.5deg) scale(.94)}
+  100%{transform:rotate(-3.5deg) scale(1)}
+}
+.stamp.animate{animation:stampin .5s cubic-bezier(.2,.9,.3,1.2) .35s both}
+.verdict .v-index{margin-top:28px;font-size:.9rem;color:var(--ink-soft)}
+.verdict .v-index b{font-family:var(--serif);font-size:1.6rem;color:var(--ink);letter-spacing:.02em}
+
+/* 스펙트럼 */
+.spectrum{margin:24px auto 0;max-width:460px}
+.spectrum-bar{
+  height:8px;border-radius:100px;position:relative;
+  background:linear-gradient(90deg,var(--navy) 0%,#AFBBC7 30%,#E6D9BC 40%,#E6D9BC 60%,#DCB6AE 72%,var(--seal) 100%);
+  opacity:.85;
+}
+.spectrum-marker{
+  position:absolute;top:-5px;width:2.5px;height:18px;background:var(--ink);
+  transform:translateX(-50%);transition:left 1s ease .5s;
+}
+.spectrum-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--ink-faint);margin-top:8px}
+
+.v-summary{
+  margin-top:30px;text-align:left;font-size:.94rem;color:var(--ink-soft);
+  border-top:1px solid var(--line-soft);padding-top:22px;word-break:keep-all;
+}
+.v-summary strong{color:var(--ink)}
+
+/* 결과 섹션 공통 */
+.r-section{margin-top:52px}
+.r-section>h3{
+  font-family:var(--serif);font-size:1.15rem;letter-spacing:.06em;
+  padding-bottom:12px;border-bottom:1px solid var(--ink);margin-bottom:20px;
+  display:flex;align-items:baseline;gap:10px;
+}
+.r-section>h3 .cnt{font-family:var(--sans);font-size:.78rem;color:var(--ink-faint);font-weight:400}
+
+/* 기여도 차트 */
+.contrib-baseline{font-size:.82rem;color:var(--ink-faint);margin-bottom:16px}
+.contrib-row{display:grid;grid-template-columns:118px 1fr 52px;align-items:center;gap:12px;margin-bottom:12px}
+.contrib-row .c-label{font-size:.82rem;color:var(--ink-soft);text-align:right;line-height:1.35;word-break:keep-all}
+.contrib-track{position:relative;height:16px;background:var(--paper-deep);border-radius:2px}
+.contrib-track::before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--line)}
+.contrib-fill{position:absolute;top:2px;bottom:2px;border-radius:1px}
+.contrib-fill.pos{left:50%;background:var(--seal);opacity:.85}
+.contrib-fill.neg{right:50%;background:var(--navy);opacity:.85}
+.contrib-row .c-val{font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.contrib-legend{display:flex;justify-content:space-between;font-size:.72rem;color:var(--ink-faint);margin-top:6px;padding-left:130px}
+@media(max-width:560px){
+  .contrib-row{grid-template-columns:86px 1fr 44px}
+  .contrib-legend{padding-left:98px}
+}
+
+/* 리스트 항목 */
+.finding{
+  display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-soft);
+  font-size:.92rem;word-break:keep-all;
+}
+.finding:last-child{border-bottom:none}
+.finding .tag{
+  flex-shrink:0;font-size:.7rem;letter-spacing:.04em;align-self:flex-start;
+  padding:3px 9px;border-radius:2px;margin-top:2px;white-space:nowrap;
+}
+.finding.risk .tag{background:var(--seal-soft);color:var(--seal)}
+.finding.partial .tag{background:var(--amber-soft);color:var(--amber)}
+.note-box{
+  font-size:.84rem;color:var(--ink-soft);background:var(--paper-deep);
+  padding:14px 18px;margin-top:18px;border-left:2px solid var(--amber);word-break:keep-all;
+}
+.empty-msg{font-size:.9rem;color:var(--ink-faint);padding:8px 0}
+
+/* 증빙 체크리스트 */
+.ev-list{list-style:none}
+.ev-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:.92rem;word-break:keep-all;
+}
+.ev-list li:last-child{border-bottom:none}
+.ev-list li::before{
+  content:"☐";font-size:1.05rem;color:var(--ink-soft);line-height:1.5;flex-shrink:0;
+}
+.ev-list li b{font-weight:600}
+.ev-list li span{color:var(--ink-soft);font-size:.85rem;display:block}
+
+/* 유의사항 */
+.caveat{font-size:.84rem;color:var(--ink-soft);word-break:keep-all}
+.caveat p{margin-bottom:12px}
+.caveat p:last-child{margin-bottom:0}
+
+/* ── 프로필 · CTA ───────────────────── */
+.profile{
+  margin-top:64px;border-top:3px double var(--ink);padding-top:40px;
+}
+.profile .p-eyebrow{font-size:.76rem;letter-spacing:.3em;color:var(--ink-soft);margin-bottom:22px}
+.profile-card{display:grid;grid-template-columns:1fr;gap:6px}
+.profile .p-name{font-family:var(--serif);font-size:1.5rem;font-weight:700;letter-spacing:.04em}
+.profile .p-name small{font-family:var(--sans);font-size:.85rem;font-weight:400;color:var(--ink-soft);margin-left:10px;letter-spacing:0}
+.profile .p-title{font-size:.95rem;color:var(--ink-soft);margin-bottom:14px}
+.profile ul{list-style:none;font-size:.88rem;color:var(--ink-soft)}
+.profile ul li{padding:3px 0 3px 16px;position:relative}
+.profile ul li::before{content:"";position:absolute;left:0;top:14px;width:6px;height:1px;background:var(--ink-soft)}
+.cta-text{
+  margin-top:26px;font-family:var(--serif);font-size:1.02rem;line-height:1.9;
+  word-break:keep-all;color:var(--ink);
+  border-left:2px solid var(--seal);padding-left:20px;
+}
+.contact-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.contact-btn{
+  display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  border:1px solid var(--ink);color:var(--ink);background:none;
+  padding:13px 26px;font-size:.92rem;font-weight:600;letter-spacing:.04em;border-radius:2px;
+  transition:all .2s;
+}
+.contact-btn:hover{background:var(--ink);color:var(--paper)}
+.contact-btn.solid{background:var(--ink);color:var(--paper)}
+.contact-btn.solid:hover{background:#0e1a2e}
+
+/* 결과 액션 */
+.result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
+.result-actions button{
+  flex:1;min-width:150px;background:none;border:1px solid var(--line);color:var(--ink-soft);
+  padding:12px;font-size:.88rem;border-radius:2px;letter-spacing:.04em;
+}
+.result-actions button:hover{border-color:var(--ink);color:var(--ink)}
+.print-hint{display:none;flex-basis:100%;font-size:.8rem;color:var(--amber);background:var(--amber-soft);padding:10px 14px;border-radius:2px;word-break:keep-all;margin:2px 0 0}
+
+/* 푸터 */
+.footer{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);font-size:.74rem;color:var(--ink-faint);text-align:center;word-break:keep-all}
+.footer-note{max-width:520px;margin:0 auto}
+.footer-brand{margin-top:16px;font-family:var(--serif);font-size:.82rem;font-weight:700;letter-spacing:.2em;color:var(--ink-soft)}
+
+/* ── 인쇄 ───────────────────── */
+@media print{
+  body{background:#fff}
+  .masthead .doc-no,.progress,.result-actions,.stage-nav,.q-answers,.footer .no-print{display:none!important}
+  .stamp,.stamp.ink-navy,.contrib-fill,.finding .tag,.spectrum-bar,.spectrum-marker{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .stamp.animate{animation:none}
+  .verdict,.gw-card{border-color:#999}
+  .wrap{padding-bottom:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .stamp.animate{animation:none}
+  .screen{animation:none}
+  .spectrum-marker{transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="brand">상생의 노동법</div>
+    <div class="doc-no" id="docDate"></div>
+  </header>
+
+  <nav class="progress" id="progress" aria-label="진단 진행 단계">
+    <div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-steps" id="progressSteps"></div>
+  </nav>
+
+  <!-- ═══════ 인트로 ═══════ -->
+  <section class="screen active" id="scr-intro">
+    <div class="hero">
+      <div class="eyebrow">Self-Diagnosis</div>
+      <div class="rule double"></div>
+      <h1><span class="hanja">任 員 · 勤 勞 者 性</span>임원의 근로자성 진단</h1>
+      <p class="lead">
+        우리 회사의 임원은 근로기준법상 근로자일까요. 이 물음의 답에 따라 <strong>퇴직금, 연장근로수당, 부당해고</strong> 등
+        분쟁의 구도가 완전히 달라집니다. 대법원은 계약의 명칭이나 등기 여부 같은 <strong>형식</strong>이 아니라,
+        임금을 목적으로 종속적인 관계에서 근로를 제공하였는지라는 <strong>실질</strong>을 기준으로 판단합니다.
+        아래 진단은 그 판단 기준을 다섯 단계로 나누어 점검합니다.
+      </p>
+      <div class="meta-chips">
+        <span>문항 11개</span><span>소요 약 3분</span><span>응답은 저장·전송되지 않습니다</span>
+      </div>
+      <div class="start-area">
+        <button class="btn-primary" onclick="goGateway()">진단 시작</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ 지위 선택 ═══════ -->
+  <section class="screen" id="scr-gateway">
+    <div class="stage-head">
+      <div class="stage-no">지위 확인</div>
+      <h2>먼저, 대상 임원의 지위를 선택해 주십시오</h2>
+      <p class="stage-sub">형식적 지위는 판단의 출발점입니다. 이후 단계에서 실질을 점검하여 출발점이 유지되는지, 뒤집히는지를 봅니다.</p>
+    </div>
+    <div class="gw-cards" id="gwCards"></div>
+    <div class="stage-nav">
+      <button class="btn-ghost" onclick="showScreen('scr-intro')">처음으로</button>
+      <button class="btn-next" id="gwNext" disabled onclick="startStages()">다음 단계</button>
+    </div>
+  </section>
+
+  <!-- ═══════ 단계 화면 (동적) ═══════ -->
+  <section class="screen" id="scr-stage">
+    <div id="stageBody"></div>
+    <div class="stage-nav">
+      <button class="btn-ghost" id="btnPrev" onclick="prevStage()">이전</button>
+      <span class="answer-count" id="answerCount"></span>
+      <button class="btn-next" id="btnNext" disabled onclick="nextStage()">다음</button>
+    </div>
+  </section>
+
+  <!-- ═══════ 결과 ═══════ -->
+  <section class="screen" id="scr-result">
+    <div class="stage-head">
+      <div class="stage-no">진단 결과</div>
+      <h2>임원 근로자성 진단서</h2>
+      <p class="stage-sub" id="resultMeta"></p>
+    </div>
+
+    <div class="verdict">
+      <div class="v-label">判 定 · 판정</div>
+      <div><span class="stamp" id="stamp"></span></div>
+      <p class="v-index">근로자성 인정 가능성 지수 <b id="indexVal"></b><span style="font-size:.85rem"> / 100</span></p>
+      <div class="spectrum">
+        <div class="spectrum-bar"><div class="spectrum-marker" id="specMarker"></div></div>
+        <div class="spectrum-labels"><span>근로자성 부정</span><span>근로자성 인정</span></div>
+      </div>
+      <p class="v-summary" id="verdictSummary"></p>
+    </div>
+
+    <div class="r-section">
+      <h3>단계별 기여도</h3>
+      <p class="contrib-baseline" id="contribBaseline"></p>
+      <div id="contribChart"></div>
+      <div class="contrib-legend"><span>◀ 근로자성 부정 방향</span><span>근로자성 인정 방향 ▶</span></div>
+    </div>
+
+    <div class="r-section">
+      <h3>근로자성이 인정되는 데 기여할 수 있는 사정 <span class="cnt" id="riskCnt"></span></h3>
+      <div id="riskList"></div>
+    </div>
+
+    <div class="r-section" id="partialSection">
+      <h3>다투어질 수 있는 항목 <span class="cnt" id="partialCnt"></span></h3>
+      <div id="partialList"></div>
+      <p class="note-box">위 항목은 어느 한쪽으로 단정하기 어렵다고 답하신 부분으로, <b>양측의 주장이 갈리는 지점</b>입니다. 실제 분쟁에서 상대방의 주된 공격 지점이 되므로, 회사에 유리한 사정을 증빙으로 남겨 두시기 바랍니다.</p>
+    </div>
+
+    <div class="r-section">
+      <h3>증빙 확보 체크리스트</h3>
+      <ul class="ev-list" id="evList"></ul>
+    </div>
+
+    <div class="r-section">
+      <h3>유의사항</h3>
+      <div class="caveat">
+        <p>임원의 근로자성은 위 항목 중 어느 한두 가지로 확정되지 않으며, 업무의 실질, 권한의 범위, 보수의 성격 등 당사자 관계 전반에 나타나는 사정을 종합하여 개별적·구체적으로 판단됩니다. 본 진단의 지수와 가중치는 판례가 정한 수치가 아니라, 그 종합판단을 돕기 위해 설계된 척도입니다.</p>
+        <p>고용·산재보험 가입 여부와 같은 부차적 징표는 사용자가 우월한 지위에서 임의로 정할 여지가 크므로, 대법원은 이러한 징표가 없다는 사정만으로 근로자성을 쉽게 부정해서는 안 된다고 판시하고 있습니다. 본 진단의 점수 체계에도 같은 취지가 반영되어 있습니다.</p>
+        <p>본 진단은 응답하신 사실을 그대로 전제합니다. 분쟁이 현실화되면 상대방(임원 측)이 주장할 사실을 기준으로 답하셔야 진단이 의미를 가지며, 회사에 유리한 쪽으로만 답할수록 위험은 실제보다 낮게 표시됩니다.</p>
+        <p>응답하시면서 확실하지 않았던 항목이 있다면, 위 증빙 자료를 확인하신 뒤 다시 진단해 보시기 바랍니다. 그 항목의 사실관계에 따라 결론이 달라질 수 있습니다.</p>
+        <p>모든 응답과 결과는 이 브라우저 안에서만 처리되며, 어디에도 저장·전송되지 않습니다.</p>
+      </div>
+    </div>
+
+    <!-- ═══════ 프로필 · CTA ═══════ -->
+    <div class="profile">
+      <div class="profile-card">
+        <div class="p-name">박재우 <small>변호사</small></div>
+        <div class="p-title">법무법인(유) 율촌 파트너</div>
+        <ul>
+          <li>서울지방노동위원회 공익위원 역임</li>
+          <li>고용노동부 자문변호사</li>
+        </ul>
+      </div>
+      <p class="cta-text">
+        진단은 여기까지입니다. 결론은 계약서와 결재 구조, 보수 체계에 남은 실질이 좌우합니다.
+        분쟁이 되기 전의 정비가 가장 적은 비용입니다. 검토가 필요하시면 편하게 연락 주십시오.
+      </p>
+      <div class="contact-row">
+        <a class="contact-btn solid" href="mailto:parkjw@yulchon.com">이메일 문의 — parkjw@yulchon.com</a>
+        <a class="contact-btn" href="tel:0225285682">전화 02-528-5682</a>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      <button onclick="copySummary(this)">결과 요약 복사</button>
+      <button onclick="printResult()">인쇄 · PDF 저장</button>
+      <button onclick="restart()">다시 진단하기</button>
+      <p class="print-hint" id="printHint">이 환경에서는 인쇄 창이 열리지 않습니다. 카카오톡 등 앱 안에서 여셨다면 우측 상단 메뉴에서 <b>'다른 브라우저로 열기'</b>를 선택한 뒤 이용해 주십시오.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="footer-note no-print">본 진단 결과는 일반 법리에 따른 참고자료로, 개별 사안에 대한 법률자문을 대신하지 않습니다. 중요한 판단은 전문가의 검토를 거치시기 바랍니다.</p>
+    <p class="footer-brand no-print">© 상생의 노동법</p>
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+/* ─────────── 데이터 ─────────── */
+
+const GATEWAYS = {
+  unreg:{ label:"비등기 임원", desc:"전무 · 상무 · 본부장 등 직함상 임원", baseline:58,
+          note:"실질에 따라 근로자로 인정될 여지가 상대적으로 큽니다. 권한의 실질을 중심으로 점검합니다." },
+  reg:  { label:"등기임원", desc:"법인 등기부에 등재된 대표이사 · 사내이사 · 감사", baseline:30,
+          note:"특별한 사정이 없는 한 근로자로 보지 않는 것이 원칙입니다. 실질이 이를 뒤집는지 점검합니다." }
+};
+
+const STAGES = [
+  { id:"s1", no:"제 1 단 계", title:"형식 및 외관적 지위", sub:"상법상 임원 요건 — 등기와 직함의 실질", core:false,
+    note:"각 문항은 대체로 그러하면 <b>예</b>, 대체로 그렇지 않으면 <b>아니오</b>, 어느 한쪽으로 정하기 어려우면 <b>일부 그러함</b>으로 답하십시오." },
+  { id:"s2", no:"제 2 단 계", title:"실질적 권한과 책임", sub:"업무집행권의 유무 — 근로자성 판단에서 가장 결정적인 쟁점입니다.", core:true },
+  { id:"s3", no:"제 3 단 계", title:"업무수행 과정의 사용종속성", sub:"지휘·감독과 구속의 정도", core:false },
+  { id:"s4", no:"제 4 단 계", title:"보수의 성격", sub:"경제적 종속성 — 보수가 무엇에 대한 대가인가", core:false },
+  { id:"s5", no:"제 5 단 계", title:"부차적 징표", sub:"고용·산재보험 가입 등 보조적 지표", core:false,
+    note:"이 단계의 징표들은 사용자가 임의로 정할 여지가 큽니다. 대법원 판시 취지에 따라, 해당하지 않더라도 근로자성을 부정하는 방향의 감점은 극히 제한됩니다." }
+];
+
+/* yes/no: 인정 방향(+) / 부정 방향(−) 가중치. '일부 그러함'은 두 값의 중간으로 계산됩니다.
+   risk: 인정 방향 응답일 때 보고서에 표시할 표제 */
+const QUESTION_DEFS = {
+  s1r:{ stage:"s1", text:"이사회에 사실상 참석하지 않거나 의결에 관여하지 않는 등, 임원 등기가 명목에 불과하다고 볼 구체적인 사정이 있습니까?",
+        yes:14, no:-10, riskOn:"yes", risk:"이사회 불참 등 임원 등기가 명목에 불과한 사정",
+        basis:"등기임원은 특별한 사정이 없는 한 근로기준법상 근로자로 보지 않는 것이 원칙입니다. 그 '특별한 사정'은 이사회 참석·의결 관여 같은 확인 가능한 사실로 판단합니다. 등재만 되어 있을 뿐 이사회 활동의 실질이 없다면 달리 판단될 수 있습니다.<br><br><b>'일부 그러함'</b> — 이사회에 참석하여 의사록에 서명·날인은 하나, 안건에 관하여 의견을 개진하거나 의사결정에 영향을 미치지는 않는 경우.",
+        ev:["registry","minutes"] },
+  s1u:{ stage:"s1", text:"이사회 의결권은 없더라도, 경영회의·운영위원회 등에 참석하여 회사의 주요 경영방침이나 사업계획 등의 의사결정에 실질적으로 참여하고 영향을 미칩니까?",
+        yes:-12, no:12, riskOn:"no", risk:"경영회의체 등 주요 의사결정에 대한 실질적 참여 없음",
+        basis:"비등기 임원에게 이사회 의결권이 없는 것은 당연하므로, 등기임원과의 형식 비교는 변별력이 없습니다. 대신 경영회의·운영위원회 등 의사결정 기구의 구성원으로서 주요 경영방침·사업계획 결정에 실질적으로 참여하는지가 임원으로서의 실질적 지위를 보여줍니다. 참여가 없다면 직함에도 불구하고 근로자로 인정될 여지가 커집니다.<br><br><b>'일부 그러함'</b> — 회의에 배석하기는 하나 보고자로 참석할 뿐 심의·의결에는 관여하지 않는 경우.",
+        ev:["registry","mgmtmeeting","minutes"] },
+  s1c:{ stage:"s1", text:"임원 취임(승진) 당시 기존 근로관계를 정리(사직 처리·퇴직금 정산)하거나, 별도의 위임계약을 체결하였습니까?",
+        yes:-8, no:7, riskOn:"no", risk:"근로관계 단절 없이 임원 취임 (위임계약 미체결)",
+        basis:"직원이 임원으로 승진할 때 사직 처리와 퇴직금 정산을 거쳐 위임계약을 새로 맺었다면, 회사가 근로관계를 끊고 위임관계로 전환하였다는 사실이 남습니다. 반대로 근로계약이 그대로 이어지고 연봉계약만 갱신되었다면 근로관계가 계속된 것으로 평가되기 쉽습니다.<br><br>외부에서 영입된 임원은 <b>처음부터 위임계약으로 위촉되었는지</b>를 기준으로 답하십시오. 처음부터 임원으로 선임된 경우(외부 영입·창업 임원 등)라면 주주총회 선임 절차 자체로 위임관계가 성립하므로, 별도의 계약서가 없더라도 '예'로 답하십시오. 반면 <b>직원에서 승진한 등기임원</b>은 주주총회 선임을 거쳤더라도, 승진 당시 사직 처리·퇴직금 정산이 있었는지를 기준으로 답하십시오.<br><br><b>'일부 그러함'</b> — 퇴직금은 정산하였으나 위임계약서는 작성하지 않은 경우처럼 절차가 일부만 이루어진 때.",
+        ev:["contract","severance"] },
+  s2a:{ stage:"s2", text:"위임전결규정상 부여된 전결권이 소액 비용 집행 등 한정된 범위에 그치지 않고, 담당 부문의 예산·계약·인사 전반에 미칩니까?",
+        yes:-6, no:5, riskOn:"no", risk:"전결권이 한정된 범위에 그침",
+        basis:"'대표이사의 결재를 받는다'는 사실만으로는 변별력이 없습니다. 실권 있는 임원도 중요 계약은 결재를 거치기 때문입니다. 실제로 결론을 가르는 것은 전결권의 <b>범위</b>입니다 — 담당 부문의 예산·계약·인사 전반에 미치는지, 아니면 소액 비용 집행 정도에 그치는지가 기준입니다. 임원 아닌 팀장급 중간관리자에게도 부여되는 수준의 한정적 전결권이라면 '아니오'에 해당합니다.<br><br><b>'일부 그러함'</b> — 회계·자금에는 전결권이 있으나 인사는 대표이사가 최종 결정하는 경우처럼 영역별로 갈리는 때.",
+        ev:["delegation","approval","minutes"] },
+  s2c:{ stage:"s2", text:"담당 조직의 구성원에 대하여 업무 지시·평가·근태 관리 등 일상적인 지휘·명령을 독자적으로 행사합니까?",
+        yes:-6, no:5, riskOn:"no", risk:"담당 조직에 대한 일상적 지휘·명령권 없음",
+        basis:"부하 직원에 대한 지휘권은 스스로 사용자적 지위에 있음을 보여주는 지표입니다. 다만 <b>채용·징계의 최종 결재권까지 보유해야 하는 것은 아닙니다.</b> 그 권한은 회사 규모를 불문하고 대표이사·인사위원회에 유보되는 것이 통상이어서, 이를 기준으로 삼으면 실권 있는 임원도 대부분 '아니오'가 되기 때문입니다.<br><br><b>'일부 그러함'</b> — 업무 지시는 하되 인사평가·근태 관리는 별도 부서가 담당하는 경우.",
+        ev:["delegation","approval"] },
+  s2d:{ stage:"s2", text:"단순히 대표이사·상위 임원이나 실질 사주를 보조하는 것을 넘어, 특정 부문이나 전문 분야에 대해 포괄적인 위임을 받아 구체적인 지휘·감독 없이 독자적인 권한과 책임 하에 조직을 운영합니까?",
+        yes:-6, no:5, riskOn:"no", risk:"포괄적 위임 없이 상급자 보조적 업무에 그침",
+        basis:"특정 부문·전문 분야를 포괄적으로 위임받아 독자적 권한과 책임 하에 조직을 운영한다면 위임관계로 볼 사정이 됩니다. 반대로 포괄 위임 없이 대표이사·상위 임원이나 실질 사주를 보조하는 일상적·반복적 업무에 그친다면 직함과 무관하게 근로자로 평가될 가능성이 높아집니다.<br><br><b>'일부 그러함'</b> — 담당 부문은 독자적으로 운영하나 다른 부문 업무에서는 지시를 받아 처리하는 경우.",
+        ev:["delegation","approval"] },
+  s3a:{ stage:"s3", text:"대표이사·상위 임원, 또는 실질적으로 경영권을 행사하는 사람(오너·실질 사주 등)으로부터 매일 또는 수시로 구체적·개별적인 업무 지시와 감독을 받고, 그 결과를 보고합니까?",
+        yes:7, no:-4, riskOn:"yes", risk:"수시로 구체적 지시·감독을 받고 결과 보고",
+        basis:"구체적·개별적 지휘감독과 보고 체계는 사용종속성의 가장 직접적인 징표입니다. 지시·감독의 주체가 반드시 대표이사일 필요는 없습니다. 대법원도 '업무집행권을 가지는 대표이사 <b>등</b>의 지휘·감독'이라고 표현하고 있고, 실제로 미등기임원이 본부장·부문장 등 상위 임원의 지휘를 받은 사안에서도 근로자성이 인정되었습니다. 직함상 대표이사라도 실질 사주가 따로 있어 그의 지시를 받아 왔다면 이 문항은 '예'에 해당합니다.<br><br><b>'일부 그러함'</b> — 일상적인 지시는 없고 중요 사안에서만 보고하거나 결재를 받는 경우.",
+        ev:["reports","approval"] },
+  s3b:{ stage:"s3", text:"일반 직원들과 마찬가지로 취업규칙·복무규정·인사규정의 적용을 받습니까?",
+        yes:6, no:-4, riskOn:"yes", risk:"취업규칙 등 일반 직원과 동일한 규정 적용",
+        basis:"취업규칙 등 사내 규정이 임원에게도 그대로 적용된다면 일반 근로자와의 구별이 약해집니다.<br><br><b>'일부 그러함'</b> — 임원 인사규정이 따로 있으나 복무·징계 절차만은 취업규칙을 준용하는 경우.",
+        ev:["rules"] },
+  s3c:{ stage:"s3", text:"출퇴근 시간과 근무장소가 지정되어 있고, 지각·결근 시 제재를 받는 등 엄격한 구속을 받습니까?",
+        yes:6, no:-4, riskOn:"yes", risk:"근무시간·장소의 엄격한 구속과 제재",
+        basis:"근무시간·장소의 지정과 위반 시 제재는 시간적·장소적 구속성의 지표입니다.<br><br><b>'일부 그러함'</b> — 출퇴근 자체는 관리되지 않으나 휴가·조퇴·외출에는 허락을 받아야 하는 경우.",
+        ev:["attendance","rules"] },
+  s4a:{ stage:"s4", text:"임원의 보수가 일반 직원의 급여 체계와는 별도로, 주주총회 결의·임원 보수규정 등 임원 보수 결정 절차에 따라 정해집니까?",
+        yes:-5, no:5, riskOn:"no", risk:"일반 직원과 동일한 급여 체계·절차로 보수 산정",
+        basis:"보수가 근로의 대가인지 이익배당적 성격인지는 그 자체로 평가의 문제이므로, 진단에서는 이를 추단하게 하는 사실인 보수의 결정 절차를 묻습니다. 주주총회 결의·임원 보수규정에 따라 정해진다면 위임관계에 따른 보수로 볼 사정이, 일반 직원과 같은 급여 체계·연봉 절차에 따라 정해진다면 근로의 대가로 볼 사정이 됩니다.<br><br><b>'일부 그러함'</b> — 총액은 임원 보수규정에 따르되 세부 항목은 직원 급여 체계를 그대로 쓰는 경우.",
+        ev:["paypolicy","minutes","payroll"] },
+  s4c:{ stage:"s4", text:"보수 수준이나 복리후생에 있어서 일반 직원과 현저하게 차별화된(우대받는) 처우를 받고 있습니까?",
+        yes:-4, no:3, riskOn:"no", risk:"일반 직원과 처우상 뚜렷한 구별 없음",
+        basis:"보수 수준·복리후생에서 일반 직원과 현저히 구별되는 우대는 임원으로서의 지위를 뒷받침하는 사정입니다. 다만 고액의 보수를 받는 비등기 임원도 근로자로 인정된 사례가 있으므로, 우대 처우만으로 근로자성이 부정되지는 않아 보조적 가중치로 반영됩니다.<br><br><b>'일부 그러함'</b> — 보수는 직원 체계와 크게 다르지 않으나 차량·집무실 등 일부 편의만 제공되는 경우.",
+        ev:["paypolicy","payroll"] },
+  s5b:{ stage:"s5", text:"원칙적으로 근로자에게만 적용되는 고용보험과 산재보험에, 일반 직원들과 동일하게 가입되어 있습니까?",
+        yes:2, no:-0.5, riskOn:"yes", risk:"고용·산재보험에 일반 직원과 동일하게 가입",
+        basis:"국민연금·건강보험은 대표이사를 포함한 임원도 직장가입자로 가입하므로 변별력이 없습니다. 반면 고용보험·산재보험은 근로자 지위를 전제로 하는 제도이므로, 일반 직원과 동일하게 가입되어 있다는 사실은 회사가 그를 근로자로 취급해 왔음을 보여주는 보조적 징표가 됩니다. 다만 미가입이라는 사정만으로 근로자성이 쉽게 부정되지는 않습니다.",
+        ev:["insurance"] },
+};
+
+const EVIDENCE = {
+  contract:  ["계약서", "위임계약서·근로계약서 등 — 명칭과 실제 내용의 일치 여부"],
+  severance: ["임원 취임 시 근로관계 정리 자료", "사직서·퇴직 처리 문서, 퇴직금 정산 내역"],
+  registry:  ["법인등기부등본", "임원 등재 여부와 등재 기간"],
+  minutes:   ["이사회·주주총회 의사록", "선임 절차와 이사회 실제 참여 내역"],
+  mgmtmeeting:["경영회의·운영위원회 자료", "회의체 구성원 자격과 참석·발언 내역"],
+  delegation:["위임전결규정·전결권 목록", "전결 범위와 금액 한도"],
+  approval:  ["결재라인·전자결재 이력", "실제 의사결정 구조에서의 위치"],
+  reports:   ["업무보고 자료", "보고 메일·주간보고 등 지시·감독의 흔적"],
+  rules:     ["취업규칙·인사규정", "임원에 대한 적용 범위 규정"],
+  attendance:["출퇴근·근태관리 기록", "시간적 구속과 제재 여부"],
+  paypolicy: ["임원 보수 규정·지급 기준", "주주총회 승인 등 보수 결정 절차"],
+  payroll:   ["급여명세서·보수 지급 내역", "보수의 구성과 지급 구조"],
+  insurance: ["고용·산재보험 가입 내역", "근로자 자격 취득 여부와 취득 시점"],
+};
+
+const BANDS = [
+  { min:80, label:"높  음",     name:"인정 가능성 높음",     navy:false,
+    text:"응답하신 사실관계는 전반적으로 <strong>사용종속성을 뒷받침</strong>합니다. 현재 구조가 유지된다면 퇴직 시 퇴직금, 재직 중 연장근로수당, 계약 종료 시 부당해고 등 근로기준법상 분쟁에서 회사가 수세에 놓일 가능성이 상당합니다. 계약 형식과 실질 권한의 정비를 서두르실 필요가 있습니다." },
+  { min:61, label:"다소\n높음", name:"인정 가능성 다소 높음", navy:false,
+    text:"근로자성을 인정하는 방향의 사정과 부정하는 방향의 사정이 혼재하나, <strong>인정 방향의 무게가 다소 앞섭니다.</strong> 특히 아래 '근로자성이 인정되는 데 기여할 수 있는 사정'으로 표시된 항목들이 분쟁 시 상대방의 핵심 주장이 될 수 있으므로, 해당 항목을 중심으로 실질을 재점검하시기 바랍니다." },
+  { min:40, label:"혼  재",     name:"인정·부정 사정 혼재",   mixed:true,
+    text:"근로자성을 인정하는 방향의 사정과 부정하는 방향의 사정이 <strong>팽팽하게 맞섭니다.</strong> 실제 분쟁에서도 결론이 갈릴 수 있는 영역이므로, 어느 쪽으로도 안심하기 어렵습니다. 아래 표시된 개별 사정을 하나씩 정비하는 것이 곧 결론을 옮기는 일입니다." },
+  { min:21, label:"다소\n낮음", name:"인정 가능성 다소 낮음", navy:true,
+    text:"현재로서는 근로자성이 <strong>부정될 가능성이 다소 우세</strong>합니다. 다만 아래 표시된 개별 사정이 달리 확인되거나 실무 운영이 변한다면 결론이 달라질 수 있습니다. 유리한 구조를 문서로 뒷받침해 두는 것이 관건입니다." },
+  { min:0,  label:"낮  음",     name:"인정 가능성 낮음",     navy:true,
+    text:"응답하신 사실관계에 따르면 임원으로서의 실질이 뚜렷하여 근로자성이 <strong>부정될 가능성이 높습니다.</strong> 다만 실무 운영이 응답하신 사실관계와 달라지면 결론도 달라질 수 있으므로, 현재의 권한 구조와 보수 체계를 증빙으로 확보해 두시면 향후 분쟁 예방에 도움이 됩니다." },
+];
+
+/* ─────────── 상태 ─────────── */
+let state = { gateway:null, answers:{}, stageIdx:0, questions:[] };
+
+/* ─────────── 화면 전환 ─────────── */
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({top:0});
+  document.getElementById("progress").classList.toggle("show", id==="scr-gateway"||id==="scr-stage"||id==="scr-result");
+  updateProgress(id);
+}
+
+function updateProgress(screenId){
+  const steps = ["지위","제1단계","제2단계","제3단계","제4단계","제5단계","결과"];
+  let cur = 0;
+  if(screenId==="scr-stage") cur = state.stageIdx+1;
+  if(screenId==="scr-result") cur = 6;
+  const el = document.getElementById("progressSteps");
+  el.innerHTML = steps.map((s,i)=>`<span class="${i===cur?"on":""}">${s}</span>`).join("");
+  document.getElementById("progressFill").style.width = ((cur+1)/steps.length*100)+"%";
+}
+
+/* ─────────── 지위 선택 ─────────── */
+function goGateway(){
+  const box = document.getElementById("gwCards");
+  box.innerHTML = Object.entries(GATEWAYS).map(([k,g])=>`
+    <button class="gw-card ${state.gateway===k?"sel":""}" data-gw="${k}" aria-pressed="${state.gateway===k}" onclick="selectGateway('${k}')">
+      <div class="gw-title">${g.label}</div>
+      <div class="gw-desc">${g.desc}</div>
+      <div class="gw-baseline">${g.note}</div>
+    </button>`).join("");
+  document.getElementById("gwNext").disabled = !state.gateway;
+  showScreen("scr-gateway");
+}
+
+function selectGateway(k){
+  if(state.gateway && state.gateway!==k){
+    delete state.answers.s1r; delete state.answers.s1u; /* 지위 변경 시 1단계 응답 초기화 */
+  }
+  state.gateway = k;
+  document.querySelectorAll(".gw-card").forEach(c=>{c.classList.toggle("sel", c.dataset.gw===k); c.setAttribute("aria-pressed", c.dataset.gw===k ? "true" : "false");});
+  document.getElementById("gwNext").disabled = false;
+}
+
+function buildQuestions(){
+  const s1 = state.gateway==="unreg" ? "s1u" : "s1r";
+  state.questions = [s1,"s1c","s2a","s2c","s2d","s3a","s3b","s3c","s4a","s4c","s5b"];
+}
+
+function startStages(){
+  buildQuestions();
+  state.stageIdx = 0;
+  renderStage();
+  showScreen("scr-stage");
+}
+
+/* ─────────── 단계 렌더링 ─────────── */
+function stageQuestions(stageId){
+  return state.questions.filter(q=>QUESTION_DEFS[q].stage===stageId);
+}
+
+function renderStage(){
+  const st = STAGES[state.stageIdx];
+  const qs = stageQuestions(st.id);
+  let html = `
+    <div class="stage-head">
+      <div class="stage-no">${st.no} <span style="color:var(--ink-faint);letter-spacing:.05em;font-family:var(--sans);font-size:.72rem">/ 5</span>
+        ${st.core?'<span class="core">핵심 쟁점</span>':""}
+      </div>
+      <h2>${st.title}</h2>
+      <p class="stage-sub">${st.sub}</p>
+      ${st.note?`<div class="stage-note">${st.note}</div>`:""}
+    </div>`;
+  qs.forEach((qid,i)=>{
+    const q = QUESTION_DEFS[qid];
+    const a = state.answers[qid];
+    html += `
+    <div class="q">
+      <div class="q-num">문 ${i+1}.</div>
+      <p class="q-text">${q.text}</p>
+      <div class="q-answers" role="group" aria-label="응답 선택">
+        <button class="ans-btn ${a==="yes"?"sel-yes":""}" aria-pressed="${a==="yes"}" onclick="answer('${qid}','yes')">예</button>
+        <button class="ans-btn ${a==="partial"?"sel-partial":""}" aria-pressed="${a==="partial"}" onclick="answer('${qid}','partial')">일부 그러함</button>
+        <button class="ans-btn ${a==="no"?"sel-no":""}" aria-pressed="${a==="no"}" onclick="answer('${qid}','no')">아니오</button>
+      </div>
+      <details><summary>판단 기준 해설</summary><p>${q.basis}</p></details>
+    </div>`;
+  });
+  document.getElementById("stageBody").innerHTML = html;
+  document.getElementById("btnPrev").textContent = state.stageIdx===0 ? "지위 선택" : "이전";
+  document.getElementById("btnNext").textContent = state.stageIdx===STAGES.length-1 ? "결과 보기" : "다음";
+  refreshNav();
+}
+
+function answer(qid, val){
+  state.answers[qid] = val;
+  const qEl = [...document.querySelectorAll(".q")][stageQuestions(STAGES[state.stageIdx].id).indexOf(qid)];
+  qEl.querySelectorAll(".ans-btn").forEach((b,i)=>{
+    b.className = "ans-btn";
+    const sel = (val==="yes"&&i===0)||(val==="partial"&&i===1)||(val==="no"&&i===2);
+    if(val==="yes"&&i===0) b.classList.add("sel-yes");
+    if(val==="partial"&&i===1) b.classList.add("sel-partial");
+    if(val==="no"&&i===2) b.classList.add("sel-no");
+    b.setAttribute("aria-pressed", sel ? "true" : "false");
+  });
+  refreshNav();
+}
+
+function refreshNav(){
+  const qs = stageQuestions(STAGES[state.stageIdx].id);
+  const done = qs.filter(q=>state.answers[q]).length;
+  document.getElementById("answerCount").textContent = `${done} / ${qs.length} 응답`;
+  document.getElementById("btnNext").disabled = done < qs.length;
+}
+
+function nextStage(){
+  if(state.stageIdx < STAGES.length-1){
+    state.stageIdx++;
+    renderStage();
+    showScreen("scr-stage");
+  } else {
+    renderResult();
+    showScreen("scr-result");
+  }
+}
+function prevStage(){
+  if(state.stageIdx===0){ goGateway(); return; }
+  state.stageIdx--;
+  renderStage();
+  showScreen("scr-stage");
+}
+
+/* ─────────── 결과 계산 ─────────── */
+function compute(){
+  const gw = GATEWAYS[state.gateway];
+  let index = gw.baseline;
+  const stageDelta = {s1:0,s2:0,s3:0,s4:0,s5:0};
+  const risks = [], partials = [];
+  const evSet = new Set(["contract","registry"]);
+
+  state.questions.forEach(qid=>{
+    const q = QUESTION_DEFS[qid];
+    const a = state.answers[qid];
+    if(a==="partial"){
+      partials.push(q);
+      q.ev.forEach(e=>evSet.add(e));
+      const dm = (q.yes + q.no) / 2;
+      index += dm;
+      stageDelta[q.stage] += dm;
+      return;
+    }
+    const d = a==="yes" ? q.yes : q.no;
+    index += d;
+    stageDelta[q.stage] += d;
+    if(a===q.riskOn){
+      risks.push({q, d});
+      q.ev.forEach(e=>evSet.add(e));
+    }
+  });
+
+  index = Math.round(Math.max(2, Math.min(98, index)));
+  const band = BANDS.find(b=>index>=b.min);
+  risks.sort((a,b)=>b.d-a.d);
+  return { index, band, stageDelta, risks, partials, evSet, gw };
+}
+
+/* ─────────── 결과 렌더링 ─────────── */
+let lastResult = null;
+
+function renderResult(){
+  const r = compute();
+  lastResult = r;
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}. ${today.getMonth()+1}. ${today.getDate()}.`;
+
+  document.getElementById("resultMeta").textContent =
+    `대상 지위: ${r.gw.label} · 진단일: ${dateStr}`;
+
+  /* 도장 */
+  const stamp = document.getElementById("stamp");
+  stamp.textContent = r.band.label;
+  stamp.classList.toggle("ink-navy", !!r.band.navy);
+  stamp.classList.toggle("ink-mixed", !!r.band.mixed);
+  stamp.classList.remove("animate");
+  void stamp.offsetWidth;
+  stamp.classList.add("animate");
+
+  document.getElementById("indexVal").textContent = r.index;
+  document.getElementById("specMarker").style.left = r.index+"%";
+
+  document.getElementById("verdictSummary").innerHTML =
+    `<strong>${r.gw.label}</strong> — ${r.gw.note}<br><br>` +
+    `<strong>${r.band.name}.</strong> ${r.band.text}`;
+
+  /* 기여도 */
+  document.getElementById("contribBaseline").textContent =
+    `출발점(${r.gw.label} 기준) ${r.gw.baseline}점에서, 각 단계의 응답이 아래와 같이 가감되었습니다.`;
+  const stageNames = {s1:"형식·외관", s2:"권한·책임", s3:"사용종속성", s4:"보수 성격", s5:"부차적 징표"};
+  const maxAbs = Math.max(1, ...Object.values(r.stageDelta).map(Math.abs));
+  document.getElementById("contribChart").innerHTML = STAGES.map(st=>{
+    const d = r.stageDelta[st.id];
+    const w = Math.abs(d)/maxAbs*48;
+    const sign = d>0 ? "+" : d<0 ? "−" : "±";
+    return `<div class="contrib-row">
+      <div class="c-label">${stageNames[st.id]}</div>
+      <div class="contrib-track">${d!==0?`<div class="contrib-fill ${d>0?"pos":"neg"}" style="width:${w}%"></div>`:""}</div>
+      <div class="c-val">${sign}${Math.abs(Math.round(d*10)/10)}</div>
+    </div>`;
+  }).join("");
+
+  /* 불리한 사정 */
+  const stageNo = {s1:"1단계",s2:"2단계",s3:"3단계",s4:"4단계",s5:"5단계"};
+  document.getElementById("riskCnt").textContent = r.risks.length ? `${r.risks.length}건` : "";
+  document.getElementById("riskList").innerHTML = r.risks.length
+    ? r.risks.map(x=>`<div class="finding risk"><span class="tag">${stageNo[x.q.stage]}</span><span>${x.q.risk}</span></div>`).join("")
+    : `<p class="empty-msg">근로자성 인정 방향으로 작용하는 응답이 확인되지 않았습니다.</p>`;
+
+  /* 다투어질 수 있는 항목 */
+  const us = document.getElementById("partialSection");
+  if(r.partials.length){
+    us.style.display = "";
+    document.getElementById("partialCnt").textContent = `${r.partials.length}건`;
+    document.getElementById("partialList").innerHTML =
+      r.partials.map(q=>`<div class="finding partial"><span class="tag">${stageNo[q.stage]}</span><span>${q.text}</span></div>`).join("");
+  } else {
+    us.style.display = "none";
+  }
+
+  /* 증빙 */
+  const order = Object.keys(EVIDENCE);
+  document.getElementById("evList").innerHTML =
+    order.filter(k=>r.evSet.has(k))
+         .map(k=>`<li><div><b>${EVIDENCE[k][0]}</b><span>${EVIDENCE[k][1]}</span></div></li>`).join("");
+}
+
+/* ─────────── 액션 ─────────── */
+function copySummary(btn){
+  if(!lastResult) return;
+  const r = lastResult;
+  const stageNames = {s1:"형식·외관", s2:"권한·책임", s3:"사용종속성", s4:"보수 성격", s5:"부차적 징표"};
+  const deltas = STAGES.map(st=>{
+    const d = r.stageDelta[st.id];
+    return `${stageNames[st.id]} ${d>0?"+":""}${Math.round(d*10)/10}`;
+  }).join(" / ");
+  const lines = [
+    "[임원 근로자성 자가진단 결과 — 상생의 노동법]",
+    `대상 지위: ${r.gw.label}`,
+    `진단 지수: ${r.index} / 100 — ${r.band.name}`,
+    `단계별 가감 (출발점 ${r.gw.baseline}): ${deltas}`,
+    `근로자성 인정에 기여할 수 있는 사정 ${r.risks.length}건 · 다투어질 수 있는 항목 ${r.partials.length}건`,
+    "※ 본 결과는 참고용 자가진단이며 법률자문이 아닙니다.",
+    "문의: 박재우 변호사 (법무법인(유) 율촌) parkjw@yulchon.com / 02-528-5682"
+  ];
+  const text = lines.join("\n");
+  const flash = (msg)=>{ const t = btn.textContent; btn.textContent = msg; setTimeout(()=>btn.textContent = t, 1800); };
+  const legacyCopy = ()=>{
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try{ ok = document.execCommand("copy"); }catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    flash(ok ? "복사되었습니다" : "복사에 실패했습니다");
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>flash("복사되었습니다")).catch(legacyCopy);
+  } else { legacyCopy(); }
+}
+
+function printResult(){
+  const hint = document.getElementById("printHint");
+  hint.style.display = "none";
+  let fired = false;
+  const mark = ()=>{ fired = true; };
+  window.addEventListener("beforeprint", mark, {once:true});
+  try{ window.print(); }catch(e){ /* 샌드박스 차단 */ }
+  setTimeout(()=>{
+    window.removeEventListener("beforeprint", mark);
+    if(!fired) hint.style.display = "block";
+  }, 1000);
+}
+
+function restart(){
+  state = { gateway:null, answers:{}, stageIdx:0, questions:[] };
+  lastResult = null;
+  showScreen("scr-intro");
+}
+
+/* ─────────── 초기화 ─────────── */
+(function init(){
+  const t = new Date();
+  document.getElementById("docDate").textContent =
+    `자가진단 · ${t.getFullYear()}. ${String(t.getMonth()+1).padStart(2,"0")}.`;
+})();
+</script>
+</body>
+</html>
