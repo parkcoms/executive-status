@@ -365,13 +365,17 @@ button{font-family:inherit;cursor:pointer}
 .site-links a { color: var(--seal); font-weight: 700; text-decoration: none; margin-left: 10px; white-space: nowrap; }
 .site-links a:hover { text-decoration: underline; }
 @media print { .site-links { display: none !important; } }
+
+/* 상단 '상생의 노동법' → 홈페이지 링크 — 2026-11-22 추가 */
+.masthead .brand a { color: inherit; text-decoration: none; }
+.masthead .brand a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header class="masthead">
-    <div class="brand">상생의 노동법</div>
+    <div class="brand"><a href="https://sangsaeng-site.vercel.app/" title="상생의 노동법 홈페이지">상생의 노동법</a></div>
     <div class="doc-no" id="docDate"></div>
   </header>
 
