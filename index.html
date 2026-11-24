@@ -375,6 +375,13 @@ button{font-family:inherit;cursor:pointer}
 /* 상단 '상생의 노동법' → 홈페이지 링크 — 2026-11-22 추가 */
 .masthead .brand a { color: inherit; text-decoration: none; }
 .masthead .brand a:hover { text-decoration: underline; }
+
+/* 결과로 상담 문의(메일) 버튼 — 2026-11-25 추가 */
+.inquiry-btn { min-height: 44px; }
+.inquiry-note { margin: 12px 0 0; font-size: .86rem; color: var(--ink-soft); line-height: 1.7; word-break: keep-all; }
+.inquiry-status { margin: 10px 0 0; font-size: .86rem; color: var(--ink); background: var(--paper-deep); border-left: 2px solid var(--amber); padding: 10px 14px; word-break: keep-all; }
+.inquiry-status:empty { display: none; }
+@media print { .inquiry-btn, .inquiry-note, .inquiry-status { display: none !important; } }
 </style>
 </head>
 <body>
@@ -503,9 +510,12 @@ button{font-family:inherit;cursor:pointer}
         분쟁이 되기 전의 정비가 가장 적은 비용입니다. 검토가 필요하시면 편하게 연락 주십시오.
       </p>
       <div class="contact-row">
-        <a class="contact-btn solid" href="mailto:parkjw@yulchon.com">이메일 문의 — parkjw@yulchon.com</a>
+        <button type="button" class="contact-btn solid inquiry-btn" onclick="inquiryMail()">이 결과로 상담 문의 메일 쓰기</button>
+        <a class="contact-btn" href="mailto:parkjw@yulchon.com">이메일 문의 — parkjw@yulchon.com</a>
         <a class="contact-btn" href="tel:0225285682">전화 02-528-5682</a>
       </div>
+      <p class="inquiry-note">결과 요약이 채워진 새 메일이 열립니다. 보내기 전에 고치거나 지울 수 있으며, 이 화면의 내용은 자동으로 전송되지 않습니다.</p>
+      <p class="inquiry-status" id="inquiryStatus" role="status" aria-live="polite"></p>
       <p class="site-links">보수 제안을 위한 초기 상담은 무료입니다. <a href="https://winwinlabor.com/fees/#contact">수임료·의뢰 절차 보기 →</a> <a href="https://winwinlabor.com/tools/">다른 실무 도구 →</a></p>
     </div>
 
@@ -863,15 +873,17 @@ function renderResult(){
 }
 
 /* ─────────── 액션 ─────────── */
-function copySummary(btn){
-  if(!lastResult) return;
-  const r = lastResult;
+function stageDeltaText(r){
   const stageNames = {s1:"형식·외관", s2:"권한·책임", s3:"사용종속성", s4:"보수 성격", s5:"부차적 징표"};
-  const deltas = STAGES.map(st=>{
+  return STAGES.map(st=>{
     const d = r.stageDelta[st.id];
     return `${stageNames[st.id]} ${d>0?"+":""}${Math.round(d*10)/10}`;
   }).join(" / ");
-  const lines = [
+}
+
+function summaryLines(r){
+  const deltas = stageDeltaText(r);
+  return [
     "[임원 근로자성 자가진단 결과 — 상생의 노동법]",
     `대상 지위: ${r.gw.label}`,
     `진단 지수: ${r.index} / 100 — ${r.band.name}`,
@@ -880,7 +892,11 @@ function copySummary(btn){
     "※ 본 결과는 참고용 자가진단이며 법률자문이 아닙니다.",
     "문의: 박재우 변호사 (법무법인(유) 율촌) parkjw@yulchon.com / 02-528-5682"
   ];
-  const text = lines.join("\n");
+}
+
+function copySummary(btn){
+  if(!lastResult) return;
+  const text = summaryLines(lastResult).join("\n");
   const flash = (msg)=>{ const t = btn.textContent; btn.textContent = msg; setTimeout(()=>btn.textContent = t, 1800); };
   const legacyCopy = ()=>{
     const ta = document.createElement("textarea");
@@ -894,6 +910,71 @@ function copySummary(btn){
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(text).then(()=>flash("복사되었습니다")).catch(legacyCopy);
   } else { legacyCopy(); }
+}
+
+// ── 결과로 상담 문의(메일) — 상생의 노동법 실무 도구 공통 양식(2026-11-25) ──
+// 버튼을 누르면 ① 전체 결과를 클립보드에 복사(가능할 때만) ② 결과 요약이 채워진 새 메일(mailto)을 연다.
+// 어디로도 자동 전송하지 않는다. 사용자가 메일 프로그램에서 확인·수정한 뒤 직접 보낸다.
+// 일부 메일 프로그램(윈도우 아웃룩 등)은 2,000자 안팎에서 mailto 주소를 자르므로 1,900자를 넘으면 요약 줄을 뒤에서부터 뺀다.
+// toolName: 도구 이름(짧게), lines: 요약 줄 배열(중요한 것부터), fullText: 클립보드에 넣을 전체 결과(없으면 lines를 합친 것)
+// 돌려주는 값: true = 요약이 잘렸음(화면에 '전체 결과를 복사해 두었다'고 알릴 것)
+function openInquiryMail(toolName, lines, fullText){
+  var TO = 'parkjw@yulchon.com', LIMIT = 1900;
+  var n = new Date(), stamp = n.getFullYear() + '. ' + (n.getMonth() + 1) + '. ' + n.getDate() + '.';
+  var subject = '[실무 도구 문의] ' + toolName;
+  var head = ['■ 결과 요약(' + stamp + ')'];
+  var tail = ['', '■ 문의', '성함/회사:', '상대방 당사자(이해상충 확인):', '사안 개요:', '',
+    '※ 민감정보는 적지 마시고, 핵심 자료는 이해상충 확인 뒤에 보내 주십시오.'];
+  var make = function(ls){
+    return 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(head.concat(ls, tail).join('\r\n'));
+  };
+  var use = lines.slice(), url = make(use), cut = false;
+  while (url.length > LIMIT && use.length > 0) {
+    use.pop(); cut = true;
+    url = make(use.concat(['… (전체 결과는 복사해 두었으니 붙여 넣어 주세요)']));
+  }
+  var full = fullText || ['■ ' + toolName + ' 결과 요약(' + stamp + ')'].concat(lines).join('\n');
+  try {
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(full).catch(function(){});
+    else { var ta = document.createElement('textarea'); ta.value = full; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+  } catch (e) {}
+  window.location.href = url;
+  return cut;
+}
+
+/* 현재 결과(lastResult)로 상담 문의 메일 쓰기 — 메일에는 판정·지수 → 지위 → 건수 → 인정 방향 사정 순,
+   단계별 가감과 다투어질 항목의 문항 전문은 클립보드(전체 결과)에만 넣는다 */
+function inquiryMail(){
+  const status = document.getElementById("inquiryStatus");
+  status.textContent = "";
+  const stageNo = {s1:"1단계",s2:"2단계",s3:"3단계",s4:"4단계",s5:"5단계"};
+  let lines, full = null;
+  if(!lastResult){
+    lines = ["아직 응답한 문항이 없습니다."];
+  } else {
+    const r = lastResult;
+    lines = [
+      `판정: ${r.band.name} (지수 ${r.index} / 100)`,
+      `대상 지위: ${r.gw.label}`,
+      `근로자성 인정에 기여할 수 있는 사정 ${r.risks.length}건 · 다투어질 수 있는 항목 ${r.partials.length}건`
+    ];
+    r.risks.forEach(x=>lines.push(`- ${x.q.risk}`));
+
+    const base = summaryLines(r);
+    const detail = [];
+    if(r.risks.length){
+      detail.push("", "[근로자성이 인정되는 데 기여할 수 있는 사정]");
+      r.risks.forEach(x=>detail.push(`- ${stageNo[x.q.stage]}: ${x.q.risk}`));
+    }
+    if(r.partials.length){
+      detail.push("", "[다투어질 수 있는 항목]");
+      r.partials.forEach(q=>detail.push(`- ${stageNo[q.stage]}: ${q.text}`));
+    }
+    full = base.slice(0, -2).concat(detail, [""], base.slice(-2)).join("\n");
+  }
+  if(openInquiryMail("임원의 근로자성 자가진단", lines, full)){
+    status.textContent = "요약이 길어 일부를 줄였습니다. 전체 결과를 복사해 두었으니 메일에 붙여 넣어 주세요.";
+  }
 }
 
 function printResult(){
@@ -912,6 +993,7 @@ function printResult(){
 function restart(){
   state = { gateway:null, answers:{}, stageIdx:0, questions:[] };
   lastResult = null;
+  document.getElementById("inquiryStatus").textContent = "";
   showScreen("scr-intro");
 }
 
